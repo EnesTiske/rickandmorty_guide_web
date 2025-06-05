@@ -1,0 +1,45 @@
+/* Top Navigation Bar */
+.top-nav {
+  width: 100vw;
+  background: # ; /* Tailwind slate-800 */
+  color: #fff;
+  padding: 0;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.top-nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+}
+.top-nav-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Footer */
+.footer {
+  width: 100vw;
+  background: #1e293b;
+  color: #fff;
+  padding: 0;
+  margin-top: 32px;
+}
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* İçerik için üst ve alt boşluk bırakmayı unutma:
+   .container veya ana içerik div'ine
+   padding-top: 56px; padding-bottom: 56px; ekle! */ 
