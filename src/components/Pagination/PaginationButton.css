@@ -25,16 +25,30 @@
   cursor: pointer;
 }
 .pagination-btn {
-  background: #3b82f6;
-  color: #fff;
+  background: theme('colors.button.primary.bg.light');
+  color: theme('colors.button.primary.text.light');
+}
+.dark .pagination-btn {
+  background: theme('colors.button.primary.bg.dark');
+  color: theme('colors.button.primary.text.dark');
 }
 .pagination-btn:hover {
-  background: #2563eb;
+  background: theme('colors.button.primary.hover.light');
+}
+.dark .pagination-btn:hover {
+  background: theme('colors.button.primary.hover.dark');
 }
 .show-less-btn {
-  background: #9ca3af;
-  color: #fff;
+  background: theme('colors.button.secondary.bg.light');
+  color: theme('colors.button.secondary.text.light');
+}
+.dark .show-less-btn {
+  background: theme('colors.button.secondary.bg.dark');
+  color: theme('colors.button.secondary.text.dark');
 }
 .show-less-btn:hover {
-  background: #6b7280;
+  background: theme('colors.button.secondary.hover.light');
+}
+.dark .show-less-btn:hover {
+  background: theme('colors.button.secondary.hover.dark');
 } 

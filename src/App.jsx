@@ -1,24 +1,28 @@
 import React from 'react';
 import { CharacterProvider } from './contexts/CharacterContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import CharacterTable from './components/CharacterTable/CharacterTable';
 import CharacterDetails from './components/CharacterDetails/CharacterDetails';
 import Filters from './components/Filters/Filters';
-import TopNav from './components/Layout/TopNav';
-import Footer from './components/Layout/Footer';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import './components/layout/Layout.css';
 
 function App() {
   return (
-    <CharacterProvider>
-      <div className="min-h-screen bg-gray-100 flex flex-col">
-        <TopNav />
-        <div className="container mx-auto px-4 py-8 flex-1" style={{paddingTop: '56px', paddingBottom: '24px'}}>
-          <Filters />
-          <CharacterTable />
-          <CharacterDetails />
+    <ThemeProvider>
+      <CharacterProvider>
+        <div className="layout bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
+          <Header />
+          <main className="container mx-auto px-4 flex-1">
+            <Filters />
+            <CharacterTable />
+            <CharacterDetails />
+          </main>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </CharacterProvider>
+      </CharacterProvider>
+    </ThemeProvider>
   );
 }
 

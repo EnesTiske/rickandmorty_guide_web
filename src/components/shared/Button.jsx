@@ -11,9 +11,9 @@ const Button = ({
   const baseStyles = 'px-4 py-2 rounded-md font-medium transition-colors duration-200';
   
   const variants = {
-    primary: 'bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 disabled:bg-gray-100',
-    danger: 'bg-red-500 text-white hover:bg-red-600 disabled:bg-red-300'
+    primary: 'bg-primary-light dark:bg-primary-dark text-white hover:bg-primary-light/80 dark:hover:bg-primary-dark/80 disabled:bg-primary-light/50 dark:disabled:bg-primary-dark/50',
+    secondary: 'bg-secondary-light dark:bg-secondary-dark text-white hover:bg-secondary-light/80 dark:hover:bg-secondary-dark/80 disabled:bg-secondary-light/50 dark:disabled:bg-secondary-dark/50',
+    danger: 'bg-danger-light dark:bg-danger-dark text-white hover:bg-danger-light/80 dark:hover:bg-danger-dark/80 disabled:bg-danger-light/50 dark:disabled:bg-danger-dark/50'
   };
 
   return (
