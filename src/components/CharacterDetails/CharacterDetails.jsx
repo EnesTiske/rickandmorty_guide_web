@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCharacterContext } from '../../contexts/CharacterContext';
 import { getStatusColor, formatDate, getEpisodeNumber } from '../../utils/helpers';
 import Button from '../shared/Button';
@@ -11,6 +11,25 @@ const CharacterDetails = () => {
     error,
     closeDetails
   } = useCharacterContext();
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        closeDetails();
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [closeDetails]);
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeDetails();
+    }
+  };
 
   if (!selectedCharacter) return null;
 
@@ -36,7 +55,10 @@ const CharacterDetails = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      onClick={handleBackdropClick}
+    >
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-start mb-4">
           <h2 className="text-2xl font-bold">{selectedCharacter.name}</h2>
