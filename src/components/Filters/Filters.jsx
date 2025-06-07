@@ -22,58 +22,78 @@ const Filters = () => {
   return (
     <div className="filters-container">
       <div className="filters-grid">
-        <Input
-          type="text"
-          name="search"
-          placeholder="Karakter ara..."
-          value={filters.search}
-          onChange={handleInputChange}
-          className="filters-input"
-        />
+        <div>
+          <label className="block text-sm font-medium text-filter-light-label dark:text-filter-dark-label mb-1">
+            Karakter Ara
+          </label>
+          <Input
+            type="text"
+            name="search"
+            placeholder="Karakter ara..."
+            value={filters.search}
+            onChange={handleInputChange}
+            className="filters-input"
+          />
+        </div>
 
-        <select
-          name="status"
-          value={filters.status}
-          onChange={handleInputChange}
-          className="filters-select"
-        >
-          {STATUS_OPTIONS.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block text-sm font-medium text-filter-light-label dark:text-filter-dark-label mb-1">
+            Durum
+          </label>
+          <select
+            name="status"
+            value={filters.status}
+            onChange={handleInputChange}
+            className="filters-select"
+          >
+            {STATUS_OPTIONS.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <select
-          name="gender"
-          value={filters.gender}
-          onChange={handleInputChange}
-          className="filters-select"
-        >
-          {GENDER_OPTIONS.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block text-sm font-medium text-filter-light-label dark:text-filter-dark-label mb-1">
+            Cinsiyet
+          </label>
+          <select
+            name="gender"
+            value={filters.gender}
+            onChange={handleInputChange}
+            className="filters-select"
+          >
+            {GENDER_OPTIONS.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <select
-          name="species"
-          value={filters.species}
-          onChange={handleInputChange}
-          className="filters-select"
-        >
-          <option value="">Tüm Türler</option>
-          <option value="Human">İnsan</option>
-          <option value="Alien">Uzaylı</option>
-          <option value="Humanoid">Humanoid</option>
-          <option value="Mythological Creature">Mitolojik Yaratık</option>
-          <option value="Animal">Hayvan</option>
-          <option value="Robot">Robot</option>
-          <option value="Cronenberg">Cronenberg</option>
-          <option value="Disease">Hastalık</option>
-          <option value="unknown">Bilinmiyor</option>
-        </select>
+        <div>
+          <label className="block text-sm font-medium text-filter-light-label dark:text-filter-dark-label mb-1">
+            Tür
+          </label>
+          <select
+            name="species"
+            value={filters.species}
+            onChange={handleInputChange}
+            className="filters-select"
+          >
+            <option value="">Tüm Türler</option>
+            <option value="Human">İnsan</option>
+            <option value="Alien">Uzaylı</option>
+            <option value="Humanoid">Humanoid</option>
+            <option value="Mythological Creature">Mitolojik Yaratık</option>
+            <option value="Animal">Hayvan</option>
+            <option value="Robot">Robot</option>
+            <option value="Cronenberg">Cronenberg</option>
+            <option value="Disease">Hastalık</option>
+            <option value="unknown">Bilinmiyor</option>
+          </select>
+        </div>
       </div>
     </div>
   );

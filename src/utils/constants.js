@@ -21,6 +21,6 @@ export const TABLE_COLUMNS = [
   { id: 'gender', label: 'Cinsiyet', sortable: true }
 ];
 
-export const ITEMS_PER_PAGE = 50;
+export const ITEMS_PER_PAGE = 20;
 
 export const API_BASE_URL = 'https://rickandmortyapi.com/api'; 

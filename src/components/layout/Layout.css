@@ -1,17 +1,18 @@
+
 /* Footer */
 .footer {
   width: 100vw;
   padding: 24px 0;
   margin-top: auto;
-  background: theme('colors.footer.bg.light');
-  color: theme('colors.footer.text.light');
-  border-top: 1px solid theme('colors.footer.border.light');
+  background: theme('colors.headerFooter.footer.light.bg');
+  color: theme('colors.headerFooter.footer.light.text');
+  border-top: 1px solid theme('colors.headerFooter.footer.light.border');
 }
 
 .dark .footer {
-  background: theme('colors.footer.bg.dark');
-  color: theme('colors.footer.text.dark');
-  border-top: 1px solid theme('colors.footer.border.dark');
+  background: theme('colors.headerFooter.footer.dark.bg');
+  color: theme('colors.headerFooter.footer.dark.text');
+  border-top: 1px solid theme('colors.headerFooter.footer.dark.border');
 }
 
 .footer-content {
@@ -31,9 +32,9 @@
 .header {
   width: 100vw;
   padding: 16px 0;
-  background: theme('colors.header.bg.light');
-  color: theme('colors.header.text.light');
-  border-bottom: 1px solid theme('colors.header.border.light');
+  background: theme('colors.headerFooter.header.light.bg');
+  color: theme('colors.headerFooter.header.light.text');
+  border-bottom: 1px solid theme('colors.headerFooter.header.light.border');
   position: fixed;
   top: 0;
   left: 0;
@@ -43,9 +44,9 @@
 }
 
 .dark .header {
-  background: theme('colors.header.bg.dark');
-  color: theme('colors.header.text.dark');
-  border-bottom: 1px solid theme('colors.header.border.dark');
+  background: theme('colors.headerFooter.header.dark.bg');
+  color: theme('colors.headerFooter.header.dark.text');
+  border-bottom: 1px solid theme('colors.headerFooter.header.dark.border');
 }
 
 .header-content {
@@ -61,11 +62,11 @@
 .header-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: theme('colors.header.text.light');
+  color: theme('colors.headerFooter.header.light.text');
 }
 
 .dark .header-logo {
-  color: theme('colors.header.text.dark');
+  color: theme('colors.headerFooter.header.dark.text');
 }
 
 .header-nav {
@@ -74,13 +75,13 @@
 }
 
 .header-nav a {
-  color: theme('colors.header.text.light');
+  color: theme('colors.headerFooter.header.light.text');
   text-decoration: none;
   transition: opacity 0.2s;
 }
 
 .dark .header-nav a {
-  color: theme('colors.header.text.dark');
+  color: theme('colors.headerFooter.header.dark.text');
 }
 
 .header-nav a:hover {

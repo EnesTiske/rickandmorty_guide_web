@@ -14,7 +14,7 @@ function App() {
       <CharacterProvider>
         <div className="layout bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
           <Header />
-          <main className="container mx-auto px-4 flex-1">
+          <main className="container mx-auto flex-1">
             <Filters />
             <CharacterTable />
             <CharacterDetails />

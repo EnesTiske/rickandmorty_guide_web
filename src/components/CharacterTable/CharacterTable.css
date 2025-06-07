@@ -6,20 +6,20 @@
   min-height: 72px;
   background: #fff;
   transition: all 0.2s;
-  width: 70vw;
+  width: 90vw;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   margin-bottom: 16px;
   margin-top: 16px;
   border: 1px solid #e5e7eb;
-  box-shadow: theme('colors.table.row.shadow.light');
   border-radius: 32px;
   overflow: hidden;
+  box-shadow: theme('colors.table.row.light.shadow');
 }
 
 .dark .character-table-row {
-  box-shadow: theme('colors.table.row.shadow.dark');
+  box-shadow: theme('colors.table.row.dark.shadow');
 }
 
 .character-table-row:last-child {
@@ -28,13 +28,13 @@
 
 .character-table-row:hover,
 .character-table-row.active {
-  box-shadow: theme('colors.table.row.hoverShadow.light');
+  box-shadow: theme('colors.table.row.light.hoverShadow');
   transform: none;
 }
 
 .dark .character-table-row:hover,
 .dark .character-table-row.active {
-  box-shadow: theme('colors.table.row.hoverShadow.dark');
+  box-shadow: theme('colors.table.row.dark.hoverShadow');
 }
 
 .character-table-cell {
@@ -93,10 +93,10 @@
 
 .character-table-header {
   display: flex;
-  @apply bg-table-header-bg-light dark:bg-table-header-bg-dark;
-  @apply border-table-header-border-light dark:border-table-header-border-dark;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
   border-bottom-width: 1px;
-  width: 70vw;
+  width: 90vw;
   margin: 0 auto;
   padding: 8px;
   border-radius: 32px;
@@ -117,15 +117,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: theme('colors.table.header.text.light');
+  color: theme('colors.table.header.light.text');
 }
 
 .dark .character-table-header .character-table-header-cell {
-  color: theme('colors.table.header.text.dark');
+  color: theme('colors.table.header.dark.text');
 }
 
 .character-table-header .character-table-header-cell:hover {
   @apply text-primary-light dark:text-primary-dark;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
 }
 
 .character-table-square-cell {
@@ -161,17 +163,17 @@
   display: flex;
   cursor: pointer;
   transition: all 0.2s ease;
-  @apply bg-table-row-bg-light dark:bg-table-row-bg-dark;
-  @apply border-table-row-border-light dark:border-table-row-border-dark;
+  @apply bg-table-row-light-bg dark:bg-table-row-dark-bg;
+  @apply border-table-row-light-border dark:border-table-row-dark-border;
   border-bottom-width: 1px;
 }
 
 .character-table-row:hover {
-  @apply bg-table-row-hover-light dark:bg-table-row-hover-dark;
+  @apply bg-table-row-light-hover dark:bg-table-row-dark-hover;
 }
 
 .character-table-row.active {
-  @apply bg-table-row-hover-light dark:bg-table-row-hover-dark;
+  @apply bg-table-row-light-hover dark:bg-table-row-dark-hover;
 }
 
 .character-table-cell {

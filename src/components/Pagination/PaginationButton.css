@@ -25,30 +25,30 @@
   cursor: pointer;
 }
 .pagination-btn {
-  background: theme('colors.button.primary.bg.light');
-  color: theme('colors.button.primary.text.light');
+  background: theme('colors.button.primary.light.bg');
+  color: theme('colors.button.primary.light.text');
 }
 .dark .pagination-btn {
-  background: theme('colors.button.primary.bg.dark');
-  color: theme('colors.button.primary.text.dark');
+  background: theme('colors.button.primary.dark.bg');
+  color: theme('colors.button.primary.dark.text');
 }
 .pagination-btn:hover {
-  background: theme('colors.button.primary.hover.light');
+  background: theme('colors.button.primary.light.hover');
 }
 .dark .pagination-btn:hover {
-  background: theme('colors.button.primary.hover.dark');
+  background: theme('colors.button.primary.dark.hover');
 }
 .show-less-btn {
-  background: theme('colors.button.secondary.bg.light');
-  color: theme('colors.button.secondary.text.light');
+  background: theme('colors.button.secondary.light.bg');
+  color: theme('colors.button.secondary.light.text');
 }
 .dark .show-less-btn {
-  background: theme('colors.button.secondary.bg.dark');
-  color: theme('colors.button.secondary.text.dark');
+  background: theme('colors.button.secondary.dark.bg');
+  color: theme('colors.button.secondary.dark.text');
 }
 .show-less-btn:hover {
-  background: theme('colors.button.secondary.hover.light');
+  background: theme('colors.button.secondary.light.hover');
 }
 .dark .show-less-btn:hover {
-  background: theme('colors.button.secondary.hover.dark');
+  background: theme('colors.button.secondary.dark.hover'); 
 } 

@@ -1,5 +1,7 @@
+const { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette } = require('./src/styles/colors.js');
+
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -14,116 +16,164 @@ export default {
         },
         background: {
           light: '#FFFFFF',
-          dark: '#010B11',
+          dark: palette[9.5],
         },
         text: {
-          light: '#1F2937',
-          dark: '#1F2937',
+          light: palette[7],
+          dark: palette[7],
         },
-        header: {
-          bg: {
-            light: '#052D44',
-            dark: '#052D44',
+        headerFooter: {
+          header: {
+            light: {
+              bg: headerFooterPalette.header.light.bg,
+              text: headerFooterPalette.header.light.text,
+              border: headerFooterPalette.header.light.border,
+              shadow: headerFooterPalette.header.light.shadow,
+            },
+            dark: {
+              bg: headerFooterPalette.header.dark.bg,
+              text: headerFooterPalette.header.dark.text,
+              border: headerFooterPalette.header.dark.border,
+              shadow: headerFooterPalette.header.dark.shadow,
+            }
           },
-          text: {
-            light: '#FFFFFF',
-            dark: '#FFFFFF',
-          },
-          border: {
-            light: '#094B71',
-            dark: '#094B71',
+          footer: {
+            light: {
+              bg: headerFooterPalette.footer.light.bg,
+              text: headerFooterPalette.footer.light.text,
+              border: headerFooterPalette.footer.light.border,
+              shadow: headerFooterPalette.footer.light.shadow,
+            },
+            dark: {
+              bg: headerFooterPalette.footer.dark.bg,
+              text: headerFooterPalette.footer.dark.text,
+              border: headerFooterPalette.footer.dark.border,
+              shadow: headerFooterPalette.footer.dark.shadow,
+            }
           }
         },
-        footer: {
-          bg: {
-            light: '#052D44',
-            dark: '#052D44',
+        modal: {
+          light: {
+            bg: modalPalette.light.bg,
+            text: modalPalette.light.text,
+            border: modalPalette.light.border,
+            overlay: modalPalette.light.overlay,
+            shadow: modalPalette.light.shadow,
           },
-          text: {
-            light: '#FFFFFF',
-            dark: '#FFFFFF',
-          },
-          border: {
-            light: '#094B71',
-            dark: '#094B71',
+          dark: {
+            bg: modalPalette.dark.bg,
+            text: modalPalette.dark.text,
+            border: modalPalette.dark.border,
+            overlay: modalPalette.dark.overlay,
+            shadow: modalPalette.dark.shadow,
           }
         },
         table: {
           header: {
-            bg: {
-              light: '#094B71',
-              dark: '#094B71',
+            light: {
+              bg: tablePalette.header.light.bg,
+              text: tablePalette.header.light.text,
+              border: tablePalette.header.light.border,
             },
-            text: {
-              light: '#FFFFFF',
-              dark: '#f5f5f5',
-            },
-            border: {
-              light: '#E5E7EB',
-              dark: '#374151',
+            dark: {
+              bg: tablePalette.header.dark.bg,
+              text: tablePalette.header.dark.text,
+              border: tablePalette.header.dark.border,
             }
           },
           row: {
-            bg: {
-              light: '#E2F3FD',
-              dark: '#8BB0C5',
+            light: {
+              bg: tablePalette.row.light.bg,
+              text: tablePalette.row.light.text,
+              border: tablePalette.row.light.border,
+              hover: tablePalette.row.light.hover,
+              shadow: tablePalette.row.light.shadow,
+              hoverShadow: tablePalette.row.light.hoverShadow,
             },
-            hover: {
-              light: '#8BB0C5',
-              dark: '#E2F3FD',
-            },
-            text: {
-              light: '#1F2937',
-              dark: '#F9FAFB',
-            },
-            border: {
-              light: '#CCE2EF',
-              dark: '#374151',
-            },
-            shadow: {
-              light: '0 2px 8px 0 rgba(0,0,0,0.04)',
-              dark: '0 2px 8px 0 rgba(255,255,255,0.1)',
-            },
-            hoverShadow: {
-              light: '0 4px 24px 0 rgba(59, 130, 246, 0.18)',
-              dark: '0 4px 24px 0 rgba(255, 255, 255, 0.15)',
+            dark: {
+              bg: tablePalette.row.dark.bg,
+              text: tablePalette.row.dark.text,
+              border: tablePalette.row.dark.border,
+              hover: tablePalette.row.dark.hover,
+              shadow: tablePalette.row.dark.shadow,
+              hoverShadow: tablePalette.row.dark.hoverShadow,
             }
           }
         },
         button: {
           primary: {
-            bg: {
-              light: '#3B82F6',
-              dark: '#2563EB',
+            light: {
+              bg: buttonPalette.primary.light.bg,
+              text: buttonPalette.primary.light.text,
+              hover: buttonPalette.primary.light.hover,
+              border: buttonPalette.primary.light.border,
             },
-            text: {
-              light: '#FFFFFF',
-              dark: '#FFFFFF',
-            },
-            hover: {
-              light: '#2563EB',
-              dark: '#1D4ED8',
+            dark: {
+              bg: buttonPalette.primary.dark.bg,
+              text: buttonPalette.primary.dark.text,
+              hover: buttonPalette.primary.dark.hover,
+              border: buttonPalette.primary.dark.border,
             }
           },
           secondary: {
-            bg: {
-              light: '#9CA3AF',
-              dark: '#6B7280',
+            light: {
+              bg: buttonPalette.secondary.light.bg,
+              text: buttonPalette.secondary.light.text,
+              hover: buttonPalette.secondary.light.hover,
+              border: buttonPalette.secondary.light.border,
             },
-            text: {
-              light: '#FFFFFF',
-              dark: '#FFFFFF',
+            dark: {
+              bg: buttonPalette.secondary.dark.bg,
+              text: buttonPalette.secondary.dark.text,
+              hover: buttonPalette.secondary.dark.hover,
+              border: buttonPalette.secondary.dark.border,
+            }
+          },
+          danger: {
+            light: {
+              bg: buttonPalette.danger.light.bg,
+              text: buttonPalette.danger.light.text,
+              hover: buttonPalette.danger.light.hover,
+              border: buttonPalette.danger.light.border,
             },
-            hover: {
-              light: '#6B7280',
-              dark: '#4B5563',
+            dark: {
+              bg: buttonPalette.danger.dark.bg,
+              text: buttonPalette.danger.dark.text,
+              hover: buttonPalette.danger.dark.hover,
+              border: buttonPalette.danger.dark.border,
             }
           }
         },
         border: {
-          light: '#E5E7EB',
-          dark: '#374151',
-        }
+          light: mainColors[2],
+          dark: palette[6],
+        },
+        filter: {
+          light: {
+            bg: filterPalette.light.bg,
+            text: filterPalette.light.text,
+            border: filterPalette.light.border,
+            hover: filterPalette.light.hover,
+            focus: {
+              border: filterPalette.light.focus.border,
+              shadow: filterPalette.light.focus.shadow,
+            },
+            placeholder: filterPalette.light.placeholder,
+            label: filterPalette.light.label,
+          },
+          dark: {
+            bg: filterPalette.dark.bg,
+            text: filterPalette.dark.text,
+            border: filterPalette.dark.border,
+            hover: filterPalette.dark.hover,
+            focus: {
+              border: filterPalette.dark.focus.border,
+              shadow: filterPalette.dark.focus.shadow,
+            },
+            placeholder: filterPalette.dark.placeholder,
+            label: filterPalette.dark.label,
+          }
+        },
       },
     },
   },

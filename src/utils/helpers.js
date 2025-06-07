@@ -1,11 +1,11 @@
 export const getStatusColor = (status) => {
   switch (status.toLowerCase()) {
     case 'alive':
-      return 'bg-green-100 text-green-800';
+      return 'bg-green-200 text-green-800';
     case 'dead':
-      return 'bg-red-100 text-red-800';
+      return 'bg-red-200 text-red-800';
     default:
-      return 'bg-gray-100 text-gray-800';
+      return 'bg-gray-200 text-gray-800';
   }
 };
 

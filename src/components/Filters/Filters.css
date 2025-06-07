@@ -20,16 +20,20 @@
 
 .filters-input,
 .filters-select {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
+  @apply w-full px-3 py-2 rounded-lg text-base outline-none transition-all duration-200;
+  @apply bg-filter-light-bg dark:bg-filter-dark-bg;
+  @apply text-filter-light-text dark:text-filter-dark-text;
+  @apply border border-filter-light-border dark:border-filter-dark-border;
+  @apply placeholder-filter-light-placeholder dark:placeholder-filter-dark-placeholder;
 }
-.filters-select:focus,
-.filters-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px #bfdbfe;
+
+.filters-input:focus,
+.filters-select:focus {
+  @apply border-filter-light-focus-border dark:border-filter-dark-focus-border;
+  @apply shadow-[0_0_0_2px_rgba(96,142,169,0.2)] dark:shadow-[0_0_0_2px_rgba(52,109,141,0.2)];
+}
+
+.filters-input:hover,
+.filters-select:hover {
+  @apply bg-filter-light-hover dark:bg-filter-dark-hover;
 } 
