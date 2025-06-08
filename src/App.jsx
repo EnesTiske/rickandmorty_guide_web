@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CharacterProvider } from './contexts/CharacterContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-import CharacterTable from './components/CharacterTable/CharacterTable';
-import CharacterDetails from './components/CharacterDetails/CharacterDetails';
-import Filters from './components/Filters/Filters';
+import { LocationProvider } from './contexts/LocationContext';
+import CharacterTable from './components/character/Table/CharacterTable';
+import CharacterDetails from './components/character/Details/CharacterDetails';
+import Filters from './components/character/Filters/Filters';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/Home/Home';
-import LocationTable from './components/LocationTable/LocationTable';
+import LocationTable from './components/location/Table/LocationTable';
 import './components/layout/Layout.css';
 
 function App() {
@@ -28,7 +29,11 @@ function App() {
                     <CharacterDetails />
                   </>
                 } />
-                <Route path="/location" element={<LocationTable />} />
+                <Route path="/location" element={
+                  <LocationProvider>
+                    <LocationTable />
+                  </LocationProvider>
+                } />
                 <Route path="/episode" element={<div>Bölümler sayfası yakında...</div>} />
               </Routes>
             </main>

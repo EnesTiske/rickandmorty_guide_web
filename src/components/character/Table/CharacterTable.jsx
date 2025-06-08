@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import { useCharacterContext } from '../../contexts/CharacterContext';
-import { TABLE_COLUMNS } from '../../utils/constants';
-import { getSortIcon } from '../../utils/helpers';
-import Table from '../shared/Table/Table';
+import { useCharacterContext } from '../../../contexts/CharacterContext';
+import { TABLE_COLUMNS } from '../../../utils/constants';
+import { getSortIcon } from '../../../utils/helpers';
+import Table from '../../shared/Table/Table';
 import CharacterTableRow from './CharacterTableRow';
 import './CharacterTable.css';
-import PaginationButton from '../Pagination/PaginationButton';
+import PaginationButton from '../../Pagination/PaginationButton';
 
 const CharacterTable = () => {
   const {

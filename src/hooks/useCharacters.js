@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { fetchCharacters } from '../api/rickAndMorty';
+import { fetchCharacters } from '../services/characterService';
 import { useDebounce } from './useDebounce';
 
 export const useCharacters = () => {

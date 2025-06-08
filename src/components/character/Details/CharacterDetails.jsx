@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useCharacterContext } from '../../contexts/CharacterContext';
-import { getStatusColor, formatDate, getEpisodeNumber } from '../../utils/helpers';
-import Button from '../shared/Button';
-import Spinner from '../shared/Spinner';
+import { useCharacterContext } from '../../../contexts/CharacterContext';
+import { getStatusColor, formatDate, getEpisodeNumber } from '../../../utils/helpers';
+import Button from '../../shared/Button';
+import Spinner from '../../shared/Spinner';
 
 const CharacterDetails = () => {
   const {
@@ -95,13 +95,13 @@ const CharacterDetails = () => {
             </div>
 
             <div>
-              <h3 className="font-semibold text-modal-light-text dark:text-modal-dark-text">Orijin</h3>
-              <p className="text-modal-light-text dark:text-modal-dark-text">{selectedCharacter.origin.name}</p>
+              <h3 className="font-semibold text-modal-light-text dark:text-modal-dark-text">Son Görünen Konum</h3>
+              <p className="text-modal-light-text dark:text-modal-dark-text">{selectedCharacter.location.name}</p>
             </div>
 
             <div>
-              <h3 className="font-semibold text-modal-light-text dark:text-modal-dark-text">Konum</h3>
-              <p className="text-modal-light-text dark:text-modal-dark-text">{selectedCharacter.location.name}</p>
+              <h3 className="font-semibold text-modal-light-text dark:text-modal-dark-text">İlk Görünen Konum</h3>
+              <p className="text-modal-light-text dark:text-modal-dark-text">{selectedCharacter.origin.name}</p>
             </div>
 
             <div>

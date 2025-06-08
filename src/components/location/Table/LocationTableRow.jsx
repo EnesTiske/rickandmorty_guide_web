@@ -1,5 +1,5 @@
 import React from 'react';
-import TableRow from '../shared/Table/TableRow';
+import TableRow from '../../shared/Table/TableRow';
 import './LocationTable.css';
 
 const LocationTableRow = ({ location, onClick, rowRef }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { getStatusColor } from '../../utils/helpers';
-import TableRow from '../shared/Table/TableRow';
+import { getStatusColor } from '../../../utils/helpers';
+import TableRow from '../../shared/Table/TableRow';
 import './CharacterTable.css';
 
 const CharacterTableRow = ({ character, onClick, rowRef }) => {

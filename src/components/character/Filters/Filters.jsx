@@ -1,7 +1,7 @@
 import React from 'react';
-import { useCharacterContext } from '../../contexts/CharacterContext';
-import { STATUS_OPTIONS, GENDER_OPTIONS } from '../../utils/constants';
-import Input from '../shared/Input';
+import { useCharacterContext } from '../../../contexts/CharacterContext';
+import { STATUS_OPTIONS, GENDER_OPTIONS } from '../../../utils/constants';
+import Input from '../../shared/Input';
 import './Filters.css';
 
 const Filters = () => {
