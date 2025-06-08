@@ -26,6 +26,21 @@ const mainColors = {
     6: "#374151",
 }
 
+const statusColors = {
+    alive: {
+        light: "#10B981",
+        dark: "#10B981"
+    },
+    dead: {
+        light: "#EF4444",
+        dark: "#EF4444"
+    },
+    unknown: {
+        light: "#6B7280",
+        dark: "#6B7280"
+    }
+}
+
 const tablePalette = {
     header: {
         light: {
@@ -178,4 +193,4 @@ const filterPalette = {
   }
 };
 
-module.exports = { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette }; 
+module.exports = { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette, statusColors }; 

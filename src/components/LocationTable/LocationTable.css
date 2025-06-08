@@ -1,0 +1,234 @@
+/* Konum Tablosu Hücreleri */
+.location-table-cell {
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @apply text-table-row-light-text dark:text-table-row-dark-text;
+}
+
+.location-table-id {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: theme('colors.table.row.light.text');
+}
+
+.location-table-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: theme('colors.table.row.light.text');
+}
+
+.location-table-type {
+  font-size: 1rem;
+  color: theme('colors.table.row.light.text');
+  font-weight: 500;
+}
+
+.location-table-dimension {
+  font-size: 1rem;
+  color: theme('colors.table.row.light.text');
+  font-style: italic;
+}
+
+.location-table-residents {
+  font-size: 1rem;
+  color: theme('colors.table.row.light.text');
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  background-color: theme('colors.headerFooter.header.light.bg');
+  color: theme('colors.table.row.dark.text');
+}
+
+.dark .location-table-residents {
+  background-color: theme('colors.primary.dark');
+}
+
+/* Özel Hücre Sınıfları */
+.location-table-square-cell {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location-table-id-cell {
+  flex: 0 0 64px;
+}
+
+.location-table-name-cell {
+  flex: 2 1 0;
+  min-width: 0;
+}
+
+/* Konum Tablosu Container */
+.location-table-container {
+  overflow-x: auto;
+}
+
+.location-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  @apply bg-background-light dark:bg-background-dark;
+}
+
+/* Konum Tablosu Header */
+.location-table-header {
+  display: flex;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+  border-bottom-width: 1px;
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 16px;
+  padding: 8px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.location-table-header .location-table-header-cell {
+  padding: 8px 24px;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: color 0.2s;
+  border-radius: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: theme('colors.table.header.light.text');
+}
+
+.dark .location-table-header .location-table-header-cell {
+  color: theme('colors.table.header.dark.text');
+}
+
+.location-table-header .location-table-header-cell:hover {
+  @apply text-primary-light dark:text-primary-dark;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+}
+
+/* Location Table Row */
+.location-table-row {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-height: 72px;
+  background: theme('colors.table.row.light.bg');
+  transition: all 0.2s;
+  width: 70vw;
+  margin: 16px auto;
+  position: relative;
+  border: 1px solid theme('colors.table.row.light.border');
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: theme('colors.table.row.light.shadow');
+}
+
+.dark .location-table-row {
+  background: theme('colors.table.row.dark.bg');
+  border-color: theme('colors.table.row.dark.border');
+  box-shadow: theme('colors.table.row.dark.shadow');
+}
+
+.location-table-row:hover,
+.location-table-row.active {
+  box-shadow: theme('colors.table.row.light.hoverShadow');
+  transform: none;
+}
+
+.dark .location-table-row:hover,
+.dark .location-table-row.active {
+  box-shadow: theme('colors.table.row.dark.hoverShadow');
+}
+
+.location-table-row:hover {
+  @apply bg-table-row-light-hover dark:bg-table-row-dark-hover;
+}
+
+/* Responsive Tasarım */
+@media (min-width: 600px) {
+  .location-table-header {
+    width: 70vw;
+  }
+  
+  .location-table-row {
+    width: 70vw;
+  }
+}
+
+/* Konum Tablosu Özel Stilleri */
+.location-table-type {
+  font-weight: 500;
+}
+
+.location-table-dimension {
+  font-style: italic;
+}
+
+.location-table-residents {
+  font-weight: 500;
+}
+
+/* Location Table Cells */
+.location-table-cell {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @apply text-table-row-light-text dark:text-table-row-dark-text;
+}
+
+.location-table-name-cell {
+  justify-content: flex-start;
+  padding-left: 16px;
+}
+
+.location-table-id-cell {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  font-weight: bold;
+  color: theme('colors.table.row.light.text');
+}
+
+.location-table-info-cell {
+  flex: 1;
+  color: theme('colors.table.row.light.text');
+}
+
+.dark .location-table-id-cell,
+.dark .location-table-info-cell {
+  color: theme('colors.table.row.dark.text');
+}
+

@@ -1,4 +1,4 @@
-const { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette } = require('./src/styles/colors.js');
+const { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette, statusColors } = require('./src/styles/colors.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
           dark: '#3B82F6',
         },
         background: {
-          light: '#FFFFFF',
+          light: mainColors[0],
           dark: palette[9.5],
         },
         text: {
@@ -89,6 +89,12 @@ module.exports = {
               hover: tablePalette.row.light.hover,
               shadow: tablePalette.row.light.shadow,
               hoverShadow: tablePalette.row.light.hoverShadow,
+              statusAlive: statusColors.alive.light,
+              statusAliveText: statusColors.alive.light,
+              statusDead: statusColors.dead.light,
+              statusDeadText: statusColors.dead.light,
+              statusUnknown: statusColors.unknown.light,
+              statusUnknownText: statusColors.unknown.light,
             },
             dark: {
               bg: tablePalette.row.dark.bg,
@@ -97,6 +103,12 @@ module.exports = {
               hover: tablePalette.row.dark.hover,
               shadow: tablePalette.row.dark.shadow,
               hoverShadow: tablePalette.row.dark.hoverShadow,
+              statusAlive: statusColors.alive.dark,
+              statusAliveText: statusColors.alive.dark,
+              statusDead: statusColors.dead.dark,
+              statusDeadText: statusColors.dead.dark,
+              statusUnknown: statusColors.unknown.dark,
+              statusUnknownText: statusColors.unknown.dark,
             }
           }
         },
