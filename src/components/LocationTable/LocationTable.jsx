@@ -22,23 +22,37 @@ const LocationTable = () => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const { isDarkMode } = useTheme();
   const rowRefs = useRef([]);
 
   useEffect(() => {
-    fetchLocations();
-  }, [page]);
+    fetchAllLocations();
+  }, []);
 
-  const fetchLocations = async () => {
+  const fetchAllLocations = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`https://rickandmortyapi.com/api/location?page=${page}`);
+      // İlk sayfayı çek
+      const response = await fetch('https://rickandmortyapi.com/api/location');
       const data = await response.json();
-      setLocations(data.results);
-      setTotalPages(data.info.pages);
+      const totalPages = data.info.pages;
+      
+      // Tüm sayfaları paralel olarak çek
+      const pagePromises = [];
+      for (let i = 2; i <= totalPages; i++) {
+        pagePromises.push(fetch(`https://rickandmortyapi.com/api/location?page=${i}`).then(res => res.json()));
+      }
+      
+      const allPagesData = await Promise.all(pagePromises);
+      
+      // Tüm verileri birleştir
+      const allLocations = [
+        ...data.results,
+        ...allPagesData.flatMap(pageData => pageData.results)
+      ];
+      
+      setLocations(allLocations);
       setError(null);
     } catch (err) {
       setError('Konumlar yüklenirken bir hata oluştu.');
