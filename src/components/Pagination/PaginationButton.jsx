@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useCharacterContext } from '../../contexts/CharacterContext';
 import './PaginationButton.css';
 
@@ -16,7 +16,15 @@ const PaginationButton = ({ rowRefs, characterCount }) => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   if ((currentPage >= totalPages && characterCount <= 20) || loading) return null;
+  
   return (
     <div className="pagination-btn-container">
       <div className="pagination-btn-group">
@@ -31,7 +39,7 @@ const PaginationButton = ({ rowRefs, characterCount }) => {
           </button>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

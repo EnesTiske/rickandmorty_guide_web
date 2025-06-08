@@ -1,17 +1,14 @@
 .pagination-btn-container {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   justify-content: center;
-  margin-top: 32px;
-  margin-bottom: 32px;
+  margin: 20px 0;
 }
+
 .pagination-btn-group {
   display: flex;
-  gap: 16px;
+  gap: 10px;
 }
+
 .pagination-btn,
 .show-less-btn {
   padding: 12px 32px;
@@ -24,31 +21,71 @@
   border: none;
   cursor: pointer;
 }
+
 .pagination-btn {
   background: theme('colors.button.primary.light.bg');
   color: theme('colors.button.primary.light.text');
 }
+
 .dark .pagination-btn {
   background: theme('colors.button.primary.dark.bg');
   color: theme('colors.button.primary.dark.text');
 }
+
 .pagination-btn:hover {
   background: theme('colors.button.primary.light.hover');
 }
+
 .dark .pagination-btn:hover {
   background: theme('colors.button.primary.dark.hover');
 }
+
 .show-less-btn {
-  background: theme('colors.button.secondary.light.bg');
-  color: theme('colors.button.secondary.light.text');
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
 .dark .show-less-btn {
   background: theme('colors.button.secondary.dark.bg');
   color: theme('colors.button.secondary.dark.text');
 }
+
 .show-less-btn:hover {
-  background: theme('colors.button.secondary.light.hover');
+  background-color: #e0e0e0;
 }
-.dark .show-less-btn:hover {
-  background: theme('colors.button.secondary.dark.hover'); 
+
+.scroll-buttons {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  z-index: 1000;
+}
+
+.scroll-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #666;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #555;
+  transform: scale(1.1);
+}
+
+.scroll-button:active {
+  transform: scale(0.95);
 } 
