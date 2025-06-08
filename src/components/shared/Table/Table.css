@@ -1,0 +1,206 @@
+/* Temel Tablo Yapısı */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  @apply bg-background-light dark:bg-background-dark;
+}
+
+/* Tablo Header */
+.table-header {
+  display: flex;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+  border-bottom-width: 1px;
+  width: 90vw;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.table-header .table-header-cell {
+  padding: 8px 24px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  user-select: none;
+  transition: color 0.2s;
+  border-radius: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: theme('colors.table.header.light.text');
+}
+
+.dark .table-header .table-header-cell {
+  color: theme('colors.table.header.dark.text');
+}
+
+.table-header .table-header-cell:hover {
+  @apply text-primary-light dark:text-primary-dark;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+}
+
+.table-rows {
+  width: 100%;
+}
+
+/* Temel Satır Yapısı */
+.table-row {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-height: 72px;
+  background: theme('colors.table.row.light.bg');
+  transition: all 0.2s;
+  width: 90vw;
+  margin: 16px auto;
+  position: relative;
+  border: 1px solid theme('colors.table.row.light.border');
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: theme('colors.table.row.light.shadow');
+}
+
+.dark .table-row {
+  background: theme('colors.table.row.dark.bg');
+  border-color: theme('colors.table.row.dark.border');
+  box-shadow: theme('colors.table.row.dark.shadow');
+}
+
+.table-row:last-child {
+  margin-bottom: 0;
+}
+
+.table-row:hover,
+.table-row.active {
+  box-shadow: theme('colors.table.row.light.hoverShadow');
+  transform: none;
+}
+
+.dark .table-row:hover,
+.dark .table-row.active {
+  box-shadow: theme('colors.table.row.dark.hoverShadow');
+}
+
+.table-row:hover {
+  @apply bg-table-row-light-hover dark:bg-table-row-dark-hover;
+}
+
+/* Hücre Yapısı */
+.table-cell {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @apply text-table-row-light-text dark:text-table-row-dark-text;
+}
+
+/* Özel Hücre Sınıfları */
+.table-square-cell {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table-id-cell {
+  flex: 0 0 64px;
+  font-weight: bold;
+  color: theme('colors.table.row.light.text');
+}
+
+.table-name-cell {
+  flex: 3 1 0;
+  min-width: 0;
+  justify-content: flex-start;
+  font-weight: 600;
+  color: theme('colors.table.row.light.text');
+}
+
+.table-info-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+/* Temel Metin Stilleri */
+.table-id {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #374151;
+}
+
+.table-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.table-text {
+  font-size: 1rem;
+  color: #374151;
+}
+
+/* Karanlık Tema */
+.dark .table-id-cell,
+.dark .table-name-cell,
+.dark .table-info-cell {
+  color: theme('colors.table.row.dark.text');
+}
+
+/* Responsive Tasarım */
+@media (max-width: 600px) {
+  .table-container {
+    width: 100vw;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+  
+  .table-header,
+  .table-row {
+    width: 100vw;
+  }
+
+  .table-row {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .table-cell {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .table-header,
+  .table-row {
+    width: 70vw;
+  }
+} 
