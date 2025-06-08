@@ -1,21 +1,16 @@
 /* Filtreler ana kapsayıcı */
 .filters-container {
-  background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
-  margin-bottom: 16px;
+  @apply p-4 rounded-xl w-[95vw] mx-auto;
+}
+
+@media (min-width: 600px) {
+  .filters-container {
+    @apply w-[70vw];
+  }
 }
 
 .filters-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 768px) {
-  .filters-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  @apply grid grid-cols-1 md:grid-cols-4 gap-4;
 }
 
 .filters-input,
