@@ -22,7 +22,7 @@ function App() {
         <Router>
           <div className="layout bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
             <Header />
-            <main className="main-container mx-auto flex-1">
+            <main className="main-container mx-auto">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/character" element={
