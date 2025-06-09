@@ -207,12 +207,21 @@
 /* Responsive Tasarım */
 @media (max-width: 600px) {  
   .episode-table-row {
-    width: 90vw;
-    margin: 16px 0;
+    width: 100vw;
+    margin: 12px 0;
   }
   .episode-container {
     margin: 0;
-    width: 90vw;
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .grid {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: 100vw;
   }
 }
 
