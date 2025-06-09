@@ -1,8 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCharacterContext } from '../../../contexts/CharacterContext';
-import { getStatusColor, formatDate, getEpisodeNumber } from '../../../utils/helpers';
+import { getStatusColor, formatDate } from '../../../utils/helpers';
 import Button from '../../shared/Button';
 import Spinner from '../../shared/Spinner';
+import { getEpisodeById } from '../../../services/episodeService';
+
+function groupEpisodesBySeason(episodes) {
+  const grouped = {};
+  episodes.forEach(ep => {
+    const seasonMatch = ep.episode.match(/^S(\d+)E\d+$/i);
+    const season = seasonMatch ? parseInt(seasonMatch[1], 10) : 0;
+    if (!grouped[season]) grouped[season] = [];
+    grouped[season].push(ep);
+  });
+  return grouped;
+}
 
 const CharacterDetails = () => {
   const {
@@ -11,6 +23,31 @@ const CharacterDetails = () => {
     error,
     closeDetails
   } = useCharacterContext();
+
+  const [episodes, setEpisodes] = useState([]);
+  const [episodesLoading, setEpisodesLoading] = useState(false);
+  const [episodesError, setEpisodesError] = useState(null);
+
+  const fetchEpisodes = async (ids) => {
+    return getEpisodeById(ids);
+  };
+
+  useEffect(() => {
+    if (!selectedCharacter) return;
+    if (!selectedCharacter.episode.length) {
+      setEpisodes([]);
+      return;
+    }
+    const ids = selectedCharacter.episode.map(url => url.split('/').pop()).join(',');
+    setEpisodesLoading(true);
+    setEpisodesError(null);
+    fetchEpisodes(ids)
+      .then(data => {
+        setEpisodes(Array.isArray(data) ? data : [data]);
+      })
+      .catch(() => setEpisodesError('Bölümler yüklenemedi.'))
+      .finally(() => setEpisodesLoading(false));
+  }, [selectedCharacter]);
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -53,6 +90,10 @@ const CharacterDetails = () => {
       </div>
     );
   }
+
+  // Bölümleri sezonlara göre grupla
+  const groupedEpisodes = groupEpisodesBySeason(episodes);
+  const sortedSeasons = Object.keys(groupedEpisodes).sort((a, b) => a - b);
 
   return (
     <div 
@@ -113,19 +154,32 @@ const CharacterDetails = () => {
 
         <div className="mt-6">
           <h3 className="font-semibold text-modal-light-text dark:text-modal-dark-text mb-2">Bölümler</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {selectedCharacter.episode.map((episodeUrl) => {
-              const episodeNumber = getEpisodeNumber(episodeUrl);
-              return (
-                <div
-                  key={episodeUrl}
-                  className="bg-modal-light-border dark:bg-modal-dark-border p-2 rounded text-sm text-modal-light-text dark:text-modal-dark-text border border-modal-light-border dark:border-modal-dark-border"
-                >
-                  Bölüm {episodeNumber}
+          {episodesLoading ? (
+            <Spinner size="small" />
+          ) : episodesError ? (
+            <div className="text-red-500">{episodesError}</div>
+          ) : episodes.length === 0 ? (
+            <div className="text-gray-500">Bu karakterin bölümü yok.</div>
+          ) : (
+            <div className="space-y-4">
+              {sortedSeasons.map(season => (
+                <div key={season}>
+                  <div className="font-bold text-lg mb-1">Sezon {season}</div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {groupedEpisodes[season].map(ep => (
+                      <div
+                        key={ep.id}
+                        className="bg-modal-light-border dark:bg-modal-dark-border p-2 rounded text-sm text-modal-light-text dark:text-modal-dark-text border border-modal-light-border dark:border-modal-dark-border"
+                      >
+                        <div className="font-semibold">{ep.name}</div>
+                        <div className="text-xs text-gray-500">{formatDate(ep.air_date)}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

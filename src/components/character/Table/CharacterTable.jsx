@@ -7,6 +7,7 @@ import CharacterTableRow from './CharacterTableRow';
 import './CharacterTable.css';
 import PaginationButton from '../../Pagination/PaginationButton';
 
+
 const CharacterTable = () => {
   const {
     characters,
@@ -16,7 +17,10 @@ const CharacterTable = () => {
     requestSort,
     selectCharacter,
     currentPage,
-    totalPages
+    totalPages,
+    itemsPerPage,
+    setCurrentPage,
+    setItemsPerPage
   } = useCharacterContext();
 
   const rowRefs = useRef([]);
@@ -56,7 +60,18 @@ const CharacterTable = () => {
       headerClassName="character-table-header"
       rowClassName="character-table-row"
       cellClassName="character-table-cell"
-      customFooter={<PaginationButton rowRefs={rowRefs} characterCount={characters.length} />}
+      customFooter={
+        <PaginationButton 
+          rowRefs={rowRefs} 
+          characterCount={characters.length}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={setItemsPerPage}
+          loading={loading}
+        />
+      }
     />
   );
 };
