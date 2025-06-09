@@ -196,10 +196,6 @@
   padding: 16px 16px 16px 0px;
 }
 
-.dark .episode-number {
-  color: theme('colors.table.row.dark.text');
-}
-
 .episode-container {
   margin-left: auto;
   margin-right: auto;
@@ -218,4 +214,39 @@
     margin: 0;
     width: 90vw;
   }
+}
+
+/* Sezonlar butonları */
+.season-button {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff;
+  color: theme('colors.table.row.light.text');
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.season-button:hover {
+  background: theme('colors.table.row.light.hover');
+}
+.dark .season-button {
+  background: theme('colors.table.row.dark.bg');
+  color: theme('colors.table.row.dark.text');
+}
+.dark .season-button:hover {
+  background: theme('colors.table.row.dark.hover');
+}
+
+.season-button-active {
+  background: theme('colors.button.primary.light.bg');
+  color: #fff;
+  font-weight: 700;
+}
+.dark .season-button-active {
+  background: theme('colors.button.primary.light.bg');
+  color: #fff;
 }

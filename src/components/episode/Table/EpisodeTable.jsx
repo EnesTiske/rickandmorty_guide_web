@@ -45,11 +45,7 @@ export default function EpisodeTable() {
               <button
                 key={season}
                 onClick={() => setSelectedSeason(season)}
-                className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
-                  selectedSeason === season
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}
+                className={`season-button${selectedSeason === season ? ' season-button-active' : ''}`}
               >
                 Sezon {season}
               </button>
