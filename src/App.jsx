@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CharacterProvider } from './contexts/CharacterContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -16,13 +16,27 @@ import './components/layout/Layout.css';
 import './App.css';
 
 function App() {
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    function updateHeaderHeight() {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    }
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => window.removeEventListener('resize', updateHeaderHeight);
+  }, []);
+
   return (
     <ThemeProvider>
       <CharacterProvider>
         <Router>
           <div className="layout bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
-            <Header />
-            <main className="main-container mx-auto">
+            <Header ref={headerRef} />
+            <main className="main-container mx-auto" style={{ paddingTop: headerHeight/2 }}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/character" element={

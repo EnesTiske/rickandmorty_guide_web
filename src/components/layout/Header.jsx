@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Link, useLocation } from 'react-router-dom';
 import './Layout.css';
 
-const Header = () => {
+const Header = forwardRef((props, ref) => {
   const { isDarkMode, toggleTheme } = useTheme();
   const location = useLocation();
 
@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className="header" ref={ref}>
       <div className="header-content">
         <Link to="/" className="header-logo">
           Rick & Morty Karakter Rehberi
@@ -57,6 +57,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
 
 export default Header; 
