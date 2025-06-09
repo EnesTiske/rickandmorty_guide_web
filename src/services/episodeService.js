@@ -1,47 +1,35 @@
-export async function fetchEpisodes(page = 1, filters = {}) {
+import { API_BASE_URL } from '../utils/constants';
+
+export const getEpisodes = async (filters = {}) => {
   const params = new URLSearchParams();
-  params.append('page', page);
-  if (filters.name) params.append('name', filters.name);
-  if (filters.episode) params.append('episode', filters.episode);
-
-  const url = `https://rickandmortyapi.com/api/episode?${params.toString()}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error('Bölümler yüklenirken bir hata oluştu.');
-  }
-  return await response.json();
-}
-
-export async function fetchAllEpisodes() {
-  const url = 'https://rickandmortyapi.com/api/episode';
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error('Bölümler yüklenirken bir hata oluştu.');
-  }
-  const data = await response.json();
-  
-  // Tüm sayfaları getir
-  const totalPages = data.info.pages;
-  const allEpisodes = [...data.results];
-  
-  for (let page = 2; page <= totalPages; page++) {
-    const pageUrl = `${url}?page=${page}`;
-    const pageResponse = await fetch(pageUrl);
-    if (!pageResponse.ok) {
-      throw new Error(`Sayfa ${page} yüklenirken bir hata oluştu.`);
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) {
+      params.append(key, value);
     }
-    const pageData = await pageResponse.json();
-    allEpisodes.push(...pageData.results);
-  }
-  
-  return allEpisodes;
-}
+  });
 
-export async function fetchEpisodeById(id) {
-  const url = `https://rickandmortyapi.com/api/episode/${id}`;
+  const url = `${API_BASE_URL}/episode?${params.toString()}`;
   const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error('Bölüm detayları yüklenirken bir hata oluştu.');
+  return response.json();
+};
+
+export const getAllEpisodes = async () => {
+  const url = `${API_BASE_URL}/episode`;
+  const response = await fetch(url);
+  const data = await response.json();
+  const totalPages = data.info.pages;
+  const pagePromises = [];
+
+  for (let i = 2; i <= totalPages; i++) {
+    pagePromises.push(fetch(`${API_BASE_URL}/episode?page=${i}`).then(res => res.json()));
   }
-  return await response.json();
-} 
+
+  const results = await Promise.all(pagePromises);
+  return [data, ...results];
+};
+
+export const getEpisodeById = async (id) => {
+  const url = `${API_BASE_URL}/episode/${id}`;
+  const response = await fetch(url);
+  return response.json();
+}; 

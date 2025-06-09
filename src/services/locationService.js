@@ -1,23 +1,20 @@
-export const fetchAllLocations = async () => {
-  try {
-    const response = await fetch('https://rickandmortyapi.com/api/location');
-    const data = await response.json();
-    const totalPages = data.info.pages;
-    
-    const pagePromises = [];
-    for (let i = 2; i <= totalPages; i++) {
-      pagePromises.push(fetch(`https://rickandmortyapi.com/api/location?page=${i}`).then(res => res.json()));
-    }
-    
-    const allPagesData = await Promise.all(pagePromises);
-    
-    const allLocations = [
-      ...data.results,
-      ...allPagesData.flatMap(pageData => pageData.results)
-    ];
-    
-    return allLocations;
-  } catch (err) {
-    throw new Error('Konumlar yüklenirken bir hata oluştu.');
+import { API_BASE_URL } from '../utils/constants';
+
+export const getLocations = async () => {
+  const response = await fetch(`${API_BASE_URL}/location`);
+  return response.json();
+};
+
+export const getAllLocations = async () => {
+  const response = await fetch(`${API_BASE_URL}/location`);
+  const data = await response.json();
+  const totalPages = data.info.pages;
+  const pagePromises = [];
+
+  for (let i = 2; i <= totalPages; i++) {
+    pagePromises.push(fetch(`${API_BASE_URL}/location?page=${i}`).then(res => res.json()));
   }
+
+  const results = await Promise.all(pagePromises);
+  return [data, ...results];
 }; 
