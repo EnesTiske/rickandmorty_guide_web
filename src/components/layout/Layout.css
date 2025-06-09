@@ -141,7 +141,7 @@
     width: 100vw;
     justify-content: center;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .header-nav {
