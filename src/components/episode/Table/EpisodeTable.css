@@ -1,0 +1,221 @@
+.flex-1 {
+  padding: 24px 0px 24px 32px;
+}
+
+/* Bölüm Tablosu Hücreleri */
+.episode-table-cell {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @apply text-table-row-light-text dark:text-table-row-dark-text;
+}
+
+.episode-table-id {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: theme('colors.table.row.light.text');
+}
+
+.episode-table-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: theme('colors.table.row.light.text');
+}
+
+.episode-table-code {
+  font-size: 1rem;
+  color: theme('colors.table.row.light.text');
+  font-weight: 500;
+}
+
+.episode-table-date {
+  font-size: 1rem;
+  color: theme('colors.table.row.light.text');
+  font-style: italic;
+}
+
+.episode-table-id-cell {
+  flex: 0 0 64px;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background: theme('colors.table.row.light.bg');
+  border-right: 1px solid theme('colors.table.row.light.border');
+}
+
+.episode-table-name-cell {
+  flex: 2 1 0;
+  min-width: 0;
+}
+
+/* Bölüm Tablosu Container */
+.episode-table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  position: relative;
+  max-width: 70vw;
+}
+
+.episode-table {
+  width: 70vw;
+  border-radius: 8px;
+  overflow: hidden;
+  @apply bg-background-light dark:bg-background-dark;
+}
+
+/* Bölüm Tablosu Header */
+.episode-table-header {
+  display: flex;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+  border-bottom-width: 1px;
+  width: 70vw;
+  margin: 0 auto;
+  margin-top: 16px;
+  padding: 8px;
+  border-radius: 32px;
+  overflow: hidden;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+}
+
+.episode-table-header .episode-table-header-cell {
+  padding: 8px 24px;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: color 0.2s;
+  border-radius: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: theme('colors.table.header.light.text');
+}
+
+.dark .episode-table-header .episode-table-header-cell {
+  color: theme('colors.table.header.dark.text');
+}
+
+.episode-table-header .episode-table-header-cell:hover {
+  @apply text-primary-light dark:text-primary-dark;
+  @apply bg-table-header-light-bg dark:bg-table-header-dark-bg;
+  @apply border-table-header-light-border dark:border-table-header-dark-border;
+}
+
+/* Episode Table Row */
+.episode-table-row {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  min-height: 72px;
+  background: theme('colors.table.row.light.bg');
+  transition: all 0.2s;
+  margin: 16px 0;
+  position: relative;
+  border: 1px solid theme('colors.table.row.light.border');
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: theme('colors.table.row.light.shadow');
+}
+
+.dark .episode-table-row {
+  background: theme('colors.table.row.dark.bg');
+  border-color: theme('colors.table.row.dark.border');
+  box-shadow: theme('colors.table.row.dark.shadow');
+}
+
+.episode-table-row:hover,
+.episode-table-row.active {
+  box-shadow: theme('colors.table.row.light.hoverShadow');
+  transform: none;
+}
+
+.dark .episode-table-row:hover,
+.dark .episode-table-row.active {
+  box-shadow: theme('colors.table.row.dark.hoverShadow');
+}
+
+.episode-table-row:hover {
+  @apply bg-table-row-light-hover dark:bg-table-row-dark-hover;
+}
+
+/* Bölüm Tablosu Özel Stilleri */
+.episode-table-code {
+  font-weight: 500;
+}
+
+.episode-table-date {
+  font-style: italic;
+}
+
+/* Episode Table Cells */
+.episode-table-cell {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @apply text-table-row-light-text dark:text-table-row-dark-text;
+}
+
+.episode-table-name-cell {
+  justify-content: flex-start;
+  padding-left: 16px;
+}
+
+.episode-table-info-cell {
+  flex: 1;
+  color: theme('colors.table.row.light.text');
+}
+
+.dark .episode-table-id-cell,
+.dark .episode-table-info-cell {
+  color: theme('colors.table.row.dark.text');
+}
+
+/* Bölüm Numarası Stili */
+.episode-number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: theme('colors.table.row.light.text');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 16px 16px 0px;
+}
+
+.dark .episode-number {
+  color: theme('colors.table.row.dark.text');
+}
+
+.episode-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  max-width: 70vw;
+} 
+
+/* Responsive Tasarım */
+@media (max-width: 600px) {  
+  .episode-table-row {
+    width: 90vw;
+    margin: 16px 0;
+  }
+  .episode-container {
+    margin: 0;
+    width: 90vw;
+  }
+}
