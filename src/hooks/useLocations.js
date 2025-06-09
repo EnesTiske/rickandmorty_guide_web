@@ -31,16 +31,29 @@ export function useLocations(filters) {
   useEffect(() => {
     let filtered = [...allLocations];
     
+    // Arama filtresi
     if (filters.search) {
       filtered = filtered.filter(loc => 
         loc.name.toLowerCase().includes(filters.search.toLowerCase())
       );
     }
+
+    // Type filtresi
     if (filters.type && filters.type.length > 0) {
-      filtered = filtered.filter(loc => filters.type.includes(loc.type));
+      filtered = filtered.filter(loc => {
+        return filters.type.some(type => 
+          loc.type.toLowerCase() === type.toLowerCase()
+        );
+      });
     }
+
+    // Dimension filtresi
     if (filters.dimension && filters.dimension.length > 0) {
-      filtered = filtered.filter(loc => filters.dimension.includes(loc.dimension));
+      filtered = filtered.filter(loc => {
+        return filters.dimension.some(dimension => 
+          loc.dimension.toLowerCase() === dimension.toLowerCase()
+        );
+      });
     }
 
     // Sıralama
@@ -84,15 +97,15 @@ export function useLocations(filters) {
   };
 
   const requestSort = (key) => {
-    if (sortConfig.key === key) {
-      if (sortConfig.direction === 'ascending') {
-        setSortConfig({ key, direction: 'descending' });
-      } else if (sortConfig.direction === 'descending') {
-        setSortConfig({ key: 'id', direction: 'ascending' });
-      }
-    } else {
-      setSortConfig({ key, direction: 'ascending' });
+    if (sortConfig.key === key && sortConfig.direction === 'descending') {
+      setSortConfig({ key: null, direction: null });
+      return;
     }
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
   };
 
   return { 
