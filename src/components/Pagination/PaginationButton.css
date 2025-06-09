@@ -2,27 +2,26 @@
   display: flex;
   justify-content: center;
   margin: 20px 0;
+  padding: 20px;
 }
 
 .pagination-btn-group {
   display: flex;
-  gap: 10px;
-}
-
-.pagination-btn,
-.show-less-btn {
-  padding: 12px 32px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-  transition: background 0.2s, box-shadow 0.2s;
-  outline: none;
-  border: none;
-  cursor: pointer;
+  gap: 8px;
+  align-items: center;
 }
 
 .pagination-btn {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  min-width: 40px;
   background: theme('colors.button.primary.light.bg');
   color: theme('colors.button.primary.light.text');
 }
@@ -32,12 +31,38 @@
   color: theme('colors.button.primary.dark.text');
 }
 
-.pagination-btn:hover {
+.pagination-btn:hover:not(:disabled) {
   background: theme('colors.button.primary.light.hover');
+  transform: translateY(-1px);
 }
 
-.dark .pagination-btn:hover {
+.dark .pagination-btn:hover:not(:disabled) {
   background: theme('colors.button.primary.dark.hover');
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pagination-btn.active {
+  background: theme('colors.button.primary.light.hover');
+  font-weight: 600;
+}
+
+.dark .pagination-btn.active {
+  background: theme('colors.button.primary.dark.hover');
+}
+
+.pagination-dots {
+  color: theme('colors.button.primary.light.text');
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.dark .pagination-dots {
+  color: theme('colors.button.primary.dark.text');
 }
 
 .show-less-btn {
@@ -60,6 +85,9 @@
 
 .scroll-buttons {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   right: 40px;
   bottom: 40px;
   z-index: 1000;
@@ -69,6 +97,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  opacity: 0.8;
   background-color: #666;
   color: white;
   border: none;
@@ -82,10 +111,6 @@
 }
 
 .scroll-button:hover {
-  background-color: #555;
   transform: scale(1.1);
+  opacity: 1;
 }
-
-.scroll-button:active {
-  transform: scale(0.95);
-} 
