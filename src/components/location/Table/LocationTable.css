@@ -141,7 +141,7 @@
   min-height: 72px;
   background: theme('colors.table.row.light.bg');
   transition: all 0.2s;
-  width: 70vw;
+  width: 90vw;
   margin: 16px auto;
   position: relative;
   border: 1px solid theme('colors.table.row.light.border');

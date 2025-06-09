@@ -1,4 +1,4 @@
-const { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette, statusColors } = require('./src/styles/colors.js');
+const { palette, mainColors, buttonPalette, tablePalette, headerFooterPalette, modalPalette, filterPalette, statusColors, linkPalette } = require('./src/styles/colors.js');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -186,6 +186,17 @@ module.exports = {
             label: filterPalette.dark.label,
           }
         },
+        link: {
+          active: {
+            text: linkPalette.active.text,
+            hover: linkPalette.active.hover,
+          },
+          inactive: {
+            text: linkPalette.inactive.text,
+            hover: linkPalette.inactive.hover,
+          },
+
+        }
       },
     },
   },

@@ -10,7 +10,10 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/Home/Home';
 import LocationTable from './components/location/Table/LocationTable';
+import EpisodeTable from './components/episode/Table/EpisodeTable';
+import EpisodeDetails from './components/episode/Details/EpisodeDetails';
 import './components/layout/Layout.css';
+import './App.css';
 
 function App() {
   return (
@@ -19,7 +22,7 @@ function App() {
         <Router>
           <div className="layout bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
             <Header />
-            <main className="container mx-auto flex-1">
+            <main className="main-container mx-auto flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/character" element={
@@ -34,7 +37,12 @@ function App() {
                     <LocationTable />
                   </LocationProvider>
                 } />
-                <Route path="/episode" element={<div>Bölümler sayfası yakında...</div>} />
+                <Route path="/episode" element={
+                  <>
+                    <EpisodeTable />
+                    <EpisodeDetails />
+                  </>
+                } />
               </Routes>
             </main>
             <Footer />

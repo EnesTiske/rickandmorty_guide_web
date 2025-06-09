@@ -17,35 +17,23 @@ const Header = () => {
         <span className="header-logo">
           Rick & Morty Karakter Rehberi
         </span>
-        <div className="flex items-center gap-4">
-          <nav className="flex gap-4">
+        <div className="header-actions">
+          <nav className="header-nav">
             <Link
               to="/character"
-              className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
-                isActive('/character')
-                  ? 'bg-primary text-white'
-                  : 'bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+              className={`header-link transition-colors duration-200 ${isActive('/character') ? 'header-link-active' : ''}`}
             >
               Karakterler
             </Link>
             <Link
               to="/location"
-              className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
-                isActive('/location')
-                  ? 'bg-primary text-white'
-                  : 'bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+              className={`header-link transition-colors duration-200 ${isActive('/location') ? 'header-link-active' : ''}`}
             >
               Konumlar
             </Link>
             <Link
               to="/episode"
-              className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
-                isActive('/episode')
-                  ? 'bg-primary text-white'
-                  : 'bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+              className={`header-link transition-colors duration-200 ${isActive('/episode') ? 'header-link-active' : ''}`}
             >
               Bölümler
             </Link>
