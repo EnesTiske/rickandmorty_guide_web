@@ -32,7 +32,7 @@ export const getEpisodeNumber = (episodeUrl) => {
 
 export const getSortIcon = (columnId, sortConfig) => {
   if (sortConfig.key !== columnId || !sortConfig.direction) return '';
-  if (sortConfig.direction === 'ascending' || sortConfig.direction === 'asc') return '↑';
-  if (sortConfig.direction === 'descending' || sortConfig.direction === 'desc') return '↓';
+  if (sortConfig.direction === 'ascending') return '↑';
+  if (sortConfig.direction === 'descending') return '↓';
   return  '';
 }; 
