@@ -1,16 +1,10 @@
 /* Filtreler ana kapsayıcı */
 .filters-container {
-  @apply p-4 rounded-xl w-[95vw] mx-auto;
-}
-
-@media (min-width: 600px) {
-  .filters-container {
-    @apply w-[70vw];
-  }
+  @apply p-4 rounded-xl overflow-y-auto max-h-[90vh];
 }
 
 .filters-grid {
-  @apply grid grid-cols-1 md:grid-cols-4 gap-4;
+  @apply grid grid-cols-1 gap-4;
 }
 
 .filters-input,
@@ -31,4 +25,68 @@
 .filters-input:hover,
 .filters-select:hover {
   @apply bg-filter-light-hover dark:bg-filter-dark-hover;
-} 
+}
+
+.filters-multiselect {
+  @apply max-h-48 overflow-y-auto p-2 rounded-lg;
+  @apply bg-filter-light-bg dark:bg-filter-dark-bg;
+  @apply border border-filter-light-border dark:border-filter-dark-border;
+}
+
+.filters-checkbox {
+  @apply w-4 h-4 rounded;
+  @apply border-2 border-filter-light-border dark:border-filter-dark-border;
+  @apply bg-filter-light-bg dark:bg-filter-dark-bg;
+  @apply checked:bg-blue-500 checked:border-blue-500;
+  @apply focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  @apply transition-all duration-200;
+}
+
+.filters-checkbox:hover {
+  @apply border-blue-400;
+}
+
+.filters-multiselect::-webkit-scrollbar {
+  @apply w-2;
+}
+
+.filters-multiselect::-webkit-scrollbar-track {
+  @apply bg-filter-light-bg dark:bg-filter-dark-bg;
+  @apply rounded-full;
+}
+
+.filters-multiselect::-webkit-scrollbar-thumb {
+  @apply bg-filter-light-border dark:bg-filter-dark-border;
+  @apply rounded-full;
+}
+
+.filters-multiselect::-webkit-scrollbar-thumb:hover {
+  @apply bg-blue-400;
+}
+
+/* Drawer Menü Stilleri */
+.filters-toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid theme('colors.filter.light.text') !important;
+  color: theme('colors.filter.light.text') !important;
+  background: transparent;
+  margin-right: auto;
+  margin-bottom: 1rem;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  box-shadow: none;
+}
+
+.filters-toggle-button:hover {
+  color: theme('colors.filter.light.hover') !important;
+  border-color: theme('colors.filter.light.hover') !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .filters-toggle-button:hover {  
+    background: theme('colors.filter.dark.hover') !important;
+  }
+}
