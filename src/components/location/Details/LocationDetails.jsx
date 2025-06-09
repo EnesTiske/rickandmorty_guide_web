@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocationContext } from '../../../contexts/LocationContext';
 import Button from '../../shared/Button';
 import Spinner from '../../shared/Spinner';
+import { getCharacters } from '../../../services/characterService';
 
 const LocationDetails = () => {
   const {
@@ -15,6 +16,10 @@ const LocationDetails = () => {
   const [residentsLoading, setResidentsLoading] = useState(false);
   const [residentsError, setResidentsError] = useState(null);
 
+  const fetchResidents = async (ids) => {
+    return getCharacters(ids);
+  };
+
   useEffect(() => {
     if (!selectedLocation) return;
     if (!selectedLocation.residents.length) {
@@ -22,13 +27,23 @@ const LocationDetails = () => {
       return;
     }
     const ids = selectedLocation.residents.map(url => url.split('/').pop()).join(',');
+    console.log('Resident IDs:', ids);
     setResidentsLoading(true);
     setResidentsError(null);
-    fetch(`https://rickandmortyapi.com/api/character/${ids}`)
-      .then(res => res.json())
+    fetchResidents(ids)
       .then(data => {
-        // API tek karakter için obje, çoklu için dizi döner
-        setResidents(Array.isArray(data) ? data : [data]);
+        let result;
+        if (Array.isArray(data)) {
+          result = data;
+        } else if (data.results) {
+          result = data.results;
+        } else if (data.id) {
+          result = [data];
+        } else {
+          result = [];
+        }
+        console.log('Residents API result:', result);
+        setResidents(result);
       })
       .catch(() => setResidentsError('Karakterler yüklenemedi.'))
       .finally(() => setResidentsLoading(false));
@@ -115,9 +130,9 @@ const LocationDetails = () => {
             <div className="text-gray-500">Bu konumda hiç karakter yok.</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {residents.map((resident) => (
+              {residents.map((resident, idx) => (
                 <div
-                  key={resident.id}
+                  key={resident.id || resident.name || idx}
                   className="flex flex-col items-center bg-modal-light-border dark:bg-modal-dark-border p-2 rounded text-sm text-modal-light-text dark:text-modal-dark-text border border-modal-light-border dark:border-modal-dark-border"
                 >
                   <img src={resident.image} alt={resident.name} className="w-16 h-16 rounded-full mb-1 object-cover" />

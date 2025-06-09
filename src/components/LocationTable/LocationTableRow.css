@@ -1,0 +1,123 @@
+/* Konum Tablosu Satırı */
+.location-table-row {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-height: 72px;
+  background: #fff;
+  transition: all 0.2s;
+  width: 100%;
+  position: relative;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: theme('colors.table.row.light.shadow');
+}
+
+.dark .location-table-row {
+  box-shadow: theme('colors.table.row.dark.shadow');
+}
+
+.location-table-row:last-child {
+  margin-bottom: 0;
+}
+
+.location-table-row-hover,
+.location-table-row-active {
+  box-shadow: theme('colors.table.row.light.hoverShadow');
+  transform: none;
+}
+
+.dark .location-table-row-hover,
+.dark .location-table-row-active {
+  box-shadow: theme('colors.table.row.dark.hoverShadow');
+}
+
+/* Konum Tablosu Hücreleri */
+.location-table-cell {
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location-table-id {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #374151;
+}
+
+.location-table-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.location-table-type {
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.location-table-dimension {
+  font-size: 1rem;
+  color: #374151;
+  font-style: italic;
+}
+
+.location-table-residents {
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* Özel Hücre Sınıfları */
+.location-table-square-cell {
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location-table-id-cell {
+  flex: 0 0 48px;
+}
+
+.location-table-name-cell {
+  flex: 2 1 0;
+  min-width: 0;
+  padding-left: 8px;
+}
+
+.location-table-info-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  color: #6B7280;
+}
+
+.dark .location-table-info-cell {
+  color: #9CA3AF;
+}
+
+/* Responsive Tasarım */
+@media (min-width: 600px) {
+  .location-table-row {
+    width: 50vw;
+  }
+} 
+

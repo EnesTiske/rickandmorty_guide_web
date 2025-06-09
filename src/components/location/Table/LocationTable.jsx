@@ -1,66 +1,41 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useLocationContext } from '../../../contexts/LocationContext';
+import { LOCATION_COLUMNS } from '../../../utils/constants';
+import { getSortIcon } from '../../../utils/helpers';
 import Table from '../../shared/Table/Table';
 import LocationTableRow from './LocationTableRow';
 import LocationDetails from '../Details/LocationDetails';
 import LocationFilters from '../Filters/LocationFilters';
-import { useLocations } from '../../../hooks/useLocations';
+import PaginationButton from '../../Pagination/PaginationButton';
 import './LocationTable.css';
 
-const LOCATION_COLUMNS = [
-  { id: 'id', label: 'ID', sortable: true, className: 'location-table-id-cell' },
-  { id: 'name', label: 'İsim', sortable: true, className: 'location-table-name-cell' },
-  { id: 'type', label: 'Tip', sortable: true, className: 'location-table-info-cell' },
-  { id: 'dimension', label: 'Boyut', sortable: true, className: 'location-table-info-cell' },
-  { 
-    id: 'residents', 
-    label: 'Sakin Sayısı', 
-    sortable: true, 
-    className: 'location-table-info-cell',
-    render: (location) => location.residents.length
-  }
-];
-
 const LocationTable = () => {
-  const [filters, setFilters] = useState({ search: '', type: '', dimension: '' });
-  const { locations, loading, error } = useLocations(filters);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const { 
+    locations, 
+    loading, 
+    error, 
+    currentPage, 
+    totalPages, 
+    itemsPerPage,
+    setCurrentPage,
+    setItemsPerPage,
+    sortConfig,
+    requestSort
+  } = useLocationContext();
   const { isDarkMode } = useTheme();
   const { openDetails } = useLocationContext();
   const rowRefs = useRef([]);
 
-  const handleSort = (key) => {
-    let direction = 'asc';
-    if (sortConfig.key === key && sortConfig.direction === 'asc') {
-      direction = 'desc';
-    }
-    setSortConfig({ key, direction });
-  };
-
-  const getSortIcon = (key) => {
-    if (sortConfig.key !== key) return '↕';
-    return sortConfig.direction === 'asc' ? '↑' : '↓';
-  };
-
   const columns = LOCATION_COLUMNS.map(column => ({
     ...column,
-    renderSortIcon: () => getSortIcon(column.id)
+    renderSortIcon: getSortIcon,
+    className: column.id === 'id' 
+      ? 'location-table-id-cell location-table-square-cell'
+      : column.id === 'name'
+      ? 'location-table-name-cell'
+      : 'location-table-info-cell'
   }));
-
-  const sortedLocations = React.useMemo(() => {
-    if (!sortConfig.key) return locations;
-    return [...locations].sort((a, b) => {
-      if (sortConfig.key === 'residents') {
-        return sortConfig.direction === 'asc'
-          ? a.residents.length - b.residents.length
-          : b.residents.length - a.residents.length;
-      }
-      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }, [locations, sortConfig]);
 
   const renderLocationRow = (location, idx, rowRef) => (
     <LocationTableRow
@@ -73,13 +48,13 @@ const LocationTable = () => {
 
   return (
     <>
-      <LocationFilters filters={filters} setFilters={setFilters} />
+      <LocationFilters />
       <Table
         columns={columns}
-        data={sortedLocations}
+        data={locations}
         onRowClick={openDetails}
         sortConfig={sortConfig}
-        onSort={handleSort}
+        onSort={requestSort}
         rowRefs={rowRefs.current}
         loading={loading}
         error={error}
@@ -89,6 +64,18 @@ const LocationTable = () => {
         headerClassName="location-table-header"
         rowClassName="location-table-row"
         cellClassName="location-table-cell"
+        customFooter={
+          <PaginationButton 
+            rowRefs={rowRefs} 
+            characterCount={locations.length}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            itemsPerPage={itemsPerPage}
+            onItemsPerPageChange={setItemsPerPage}
+            loading={loading}
+          />
+        }
       />
       <LocationDetails />
     </>
