@@ -14,9 +14,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-content">
-        <span className="header-logo">
+        <Link to="/" className="header-logo">
           Rick & Morty Karakter Rehberi
-        </span>
+        </Link>
         <div className="header-actions">
           <nav className="header-nav">
             <Link
