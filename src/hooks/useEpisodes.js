@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchAllEpisodes, fetchEpisodeById } from '../services/episodeService';
+import { getAllEpisodes, getEpisodeById } from '../services/episodeService';
 
 export function useEpisodes() {
   const [episodes, setEpisodes] = useState([]);
@@ -10,8 +10,9 @@ export function useEpisodes() {
     const loadEpisodes = async () => {
       try {
         setLoading(true);
-        const data = await fetchAllEpisodes();
-        setEpisodes(data);
+        const allPages = await getAllEpisodes();
+        const allEpisodes = allPages.flatMap(page => page.results);
+        setEpisodes(allEpisodes);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -37,7 +38,7 @@ export function useEpisodeDetails(episodeId) {
 
       try {
         setLoading(true);
-        const data = await fetchEpisodeById(episodeId);
+        const data = await getEpisodeById(episodeId);
         setEpisode(data);
         setError(null);
       } catch (err) {

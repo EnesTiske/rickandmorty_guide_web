@@ -1,58 +1,109 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { fetchCharacters } from '../services/characterService';
-import { useDebounce } from './useDebounce';
+import { useState, useEffect } from 'react';
+import { getCharacters } from '../services/characterService';
+import { ITEMS_PER_PAGE } from '../utils/constants';
 
-export const useCharacters = () => {
+export function useCharacters(filters) {
+  const [allCharacters, setAllCharacters] = useState([]);
   const [characters, setCharacters] = useState([]);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [filters, setFilters] = useState({
-    search: '',
-    status: '',
-    gender: '',
-    species: ''
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [sortConfig, setSortConfig] = useState({
-    key: null,
+    key: 'id',
     direction: 'ascending'
   });
 
-  const debouncedSearch = useDebounce(filters.search, 500);
-  const filtersRef = useRef(filters);
-  const searchRef = useRef(debouncedSearch);
-
-  // Filtre veya arama değişirse karakterleri sıfırla ve ilk sayfayı yükle
+  // Tüm karakterleri yükle
   useEffect(() => {
-    const fetchFirstPage = async () => {
-      try {
-        setLoading(true);
+    setLoading(true);
+    getCharacters()
+      .then(data => {
+        setAllCharacters(data.results);
         setError(null);
-        const data = await fetchCharacters(1, {
-          ...filters,
-          name: debouncedSearch,
-          search: undefined
-        });
-        setCharacters(data.results);
-        setCurrentPage(1);
-        setTotalPages(data.info.pages);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFirstPage();
-    // eslint-disable-next-line
-  }, [filters, debouncedSearch]);
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
-  const requestSort = useCallback((key) => {
+  // Filtreleme ve sayfalama
+  useEffect(() => {
+    let filtered = [...allCharacters];
+    
+    // Arama filtresi
+    if (filters.search) {
+      filtered = filtered.filter(character => 
+        character.name.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    }
+
+    // Status filtresi
+    if (filters.status && filters.status.length > 0) {
+      filtered = filtered.filter(character => {
+        return filters.status.some(status => 
+          character.status.toLowerCase() === status.toLowerCase()
+        );
+      });
+    }
+
+    // Gender filtresi
+    if (filters.gender && filters.gender.length > 0) {
+      filtered = filtered.filter(character => {
+        return filters.gender.some(gender => 
+          character.gender.toLowerCase() === gender.toLowerCase()
+        );
+      });
+    }
+
+    // Species filtresi
+    if (filters.species && filters.species.length > 0) {
+      filtered = filtered.filter(character => {
+        return filters.species.some(species => 
+          character.species.toLowerCase() === species.toLowerCase()
+        );
+      });
+    }
+
+    // Sıralama
+    if (sortConfig.key) {
+      filtered.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    // Toplam sayfa sayısını hesapla
+    const total = Math.ceil(filtered.length / itemsPerPage);
+    setTotalPages(total);
+
+    // Mevcut sayfa numarasını kontrol et
+    if (currentPage > total) {
+      setCurrentPage(1);
+    }
+
+    // Mevcut sayfadaki verileri al
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedData = filtered.slice(startIndex, endIndex);
+
+    setCharacters(paginatedData);
+  }, [allCharacters, filters, currentPage, itemsPerPage, sortConfig]);
+
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    setItemsPerPage(newItemsPerPage);
+    setCurrentPage(1);
+  };
+
+  const requestSort = (key) => {
     if (sortConfig.key === key && sortConfig.direction === 'descending') {
       setSortConfig({ key: null, direction: null });
-      const sortedById = [...characters].sort((a, b) => a.id - b.id);
-      setCharacters(sortedById);
       return;
     }
     let direction = 'ascending';
@@ -60,86 +111,29 @@ export const useCharacters = () => {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
+  };
 
-    const sortedCharacters = [...characters].sort((a, b) => {
-      if (a[key] < b[key]) {
-        return direction === 'ascending' ? -1 : 1;
-      }
-      if (a[key] > b[key]) {
-        return direction === 'ascending' ? 1 : -1;
-      }
-      return 0;
-    });
-
-    setCharacters(sortedCharacters);
-  }, [characters, sortConfig]);
-
-  const selectCharacter = useCallback((character) => {
+  const selectCharacter = (character) => {
     setSelectedCharacter(character);
-  }, []);
+  };
 
-  const closeDetails = useCallback(() => {
+  const closeDetails = () => {
     setSelectedCharacter(null);
-  }, []);
-
-  // Devamını Yükle fonksiyonu
-  const loadMoreCharacters = useCallback(async () => {
-    if (currentPage >= totalPages) return;
-    try {
-      setLoading(true);
-      setError(null);
-      const nextPage = currentPage + 1;
-      const data = await fetchCharacters(nextPage, {
-        ...filters,
-        name: debouncedSearch,
-        search: undefined
-      });
-      setCharacters(prev => [...prev, ...data.results]);
-      setCurrentPage(nextPage);
-      setTotalPages(data.info.pages);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [currentPage, totalPages, filters, debouncedSearch]);
-
-  // Daha Az Göster fonksiyonu
-  const resetCharactersToFirstPage = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await fetchCharacters(1, {
-        ...filters,
-        name: debouncedSearch,
-        search: undefined
-      });
-      setCharacters(data.results);
-      setCurrentPage(1);
-      setTotalPages(data.info.pages);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters, debouncedSearch]);
+  };
 
   return {
     characters,
     selectedCharacter,
     currentPage,
     totalPages,
-    filters,
+    itemsPerPage,
     loading,
     error,
     sortConfig,
-    debouncedSearch,
     setCurrentPage,
-    setFilters,
+    setItemsPerPage: handleItemsPerPageChange,
     requestSort,
     selectCharacter,
-    closeDetails,
-    loadMoreCharacters,
-    resetCharactersToFirstPage
+    closeDetails
   };
-}; 
+} 
