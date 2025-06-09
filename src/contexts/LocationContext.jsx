@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { fetchAllLocations } from '../services/locationService';
+import React, { createContext, useContext, useState } from 'react';
+import { useLocations } from '../hooks/useLocations';
+import { ITEMS_PER_PAGE } from '../utils/constants';
 
 const LocationContext = createContext();
 
@@ -12,37 +13,42 @@ export const useLocationContext = () => {
 };
 
 export const LocationProvider = ({ children }) => {
-  const [locations, setLocations] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({
+    search: '',
+    type: [],
+    dimension: []
+  });
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  const fetchLocations = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchAllLocations();
-      setLocations(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const {
+    locations,
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    itemsPerPage,
+    sortConfig,
+    setCurrentPage,
+    setItemsPerPage,
+    requestSort
+  } = useLocations(filters);
 
-  const openDetails = useCallback((location) => {
-    setSelectedLocation(location);
-  }, []);
-
-  const closeDetails = useCallback(() => {
-    setSelectedLocation(null);
-  }, []);
+  const openDetails = (location) => setSelectedLocation(location);
+  const closeDetails = () => setSelectedLocation(null);
 
   const value = {
     locations,
     loading,
     error,
-    fetchLocations,
+    filters,
+    setFilters,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    itemsPerPage,
+    setItemsPerPage,
+    sortConfig,
+    requestSort,
     selectedLocation,
     openDetails,
     closeDetails
