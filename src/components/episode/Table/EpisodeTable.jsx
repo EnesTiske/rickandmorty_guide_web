@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useEpisodes } from '../../../hooks/useEpisodes';
 import { groupEpisodesBySeason, getSeasons, getSeasonAndEpisode } from '../../../utils/episodeUtils';
+import EpisodeDetails from '../Details/EpisodeDetails';
 import './EpisodeTable.css';
 
 export default function EpisodeTable() {
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState(null);
 
   const { episodes, loading, error } = useEpisodes();
   const seasons = getSeasons(episodes);
@@ -64,7 +66,8 @@ export default function EpisodeTable() {
               return (
                 <div
                   key={episode.id}
-                  className="episode-table-row"
+                  className="episode-table-row cursor-pointer"
+                  onClick={() => setSelectedEpisodeId(episode.id)}
                 >
                   <div className="flex justify-between items-center w-full">
                     <div className="flex-1">
@@ -88,6 +91,20 @@ export default function EpisodeTable() {
           </div>
         </div>
       </div>
+      {/* Detay Modalı */}
+      {selectedEpisodeId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative w-full max-w-2xl">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white"
+              onClick={() => setSelectedEpisodeId(null)}
+            >
+              ✕
+            </button>
+            <EpisodeDetails episodeId={selectedEpisodeId} onClose={() => setSelectedEpisodeId(null)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
